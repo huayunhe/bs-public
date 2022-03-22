@@ -7,3 +7,13 @@ export const fetchData = query => {
         params: query
     });
 };
+export const userLogin = (userName,userPassword) => {
+    return request({
+        url: '/user/login',
+        method: 'get',
+        params: {
+            userName,
+            userPassword
+        }
+    });
+};

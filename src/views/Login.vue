@@ -1,7 +1,7 @@
 <template>
     <div class="login-wrap">
         <div class="ms-login">
-            <div class="ms-title">后台管理系统</div>
+            <div class="ms-title">机器视觉智能分析应用系统</div>
             <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
                 <el-form-item prop="username">
                     <el-input v-model="param.username" placeholder="username">
@@ -31,6 +31,7 @@ import { ref, reactive } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
+import { userLogin } from  "../api/index";
 
 export default {
     setup() {
@@ -54,16 +55,26 @@ export default {
         };
         const login = ref(null);
         const submitForm = () => {
-            login.value.validate((valid) => {
-                if (valid) {
+            // login.value.validate((valid) => {
+            //     if (valid) {
+            //         ElMessage.success("登录成功");
+            //         localStorage.setItem("ms_username", param.username);
+            //         router.push("/");
+            //     } else {
+            //         ElMessage.error("登录成功");
+            //         return false;
+            //     }
+            // });
+            userLogin(param.username, param.password).then((res)=>{
+                if(res.code===200){
                     ElMessage.success("登录成功");
                     localStorage.setItem("ms_username", param.username);
                     router.push("/");
                 } else {
-                    ElMessage.error("登录成功");
+                    ElMessage.error(res.msg);
                     return false;
                 }
-            });
+            })
         };
 
         const store = useStore();
