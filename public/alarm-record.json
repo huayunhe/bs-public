@@ -1,0 +1,15 @@
+{
+  "list": [
+    {
+      "name": "video1",
+      "floaterAlarm": "fa1",
+      "waterLevelAlarm": "wla1"
+    },
+    {
+      "name": "video2",
+      "floaterAlarm": "fa2",
+      "waterLevelAlarm": "wla2"
+    }
+  ],
+  "pageTotal": 1
+}

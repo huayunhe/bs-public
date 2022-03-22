@@ -3,9 +3,9 @@
     <div class="crumbs">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item>
-          <i class="el-icon-lx-calendar"></i>设备
+          <i class="el-icon-lx-calendar"></i>告警
         </el-breadcrumb-item>
-        <el-breadcrumb-item>关联管理</el-breadcrumb-item>
+        <el-breadcrumb-item>告警记录上报管理</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="container">
@@ -30,13 +30,13 @@
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="cameraId"
-          label="摄像头编号"
+          prop="floaterAlarm"
+          label="水面漂浮物告警信息"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="cameraAddr"
-          label="摄像头地址"
+          prop="waterLevelAlarm"
+          label="水位告警信息"
           align="center"
         ></el-table-column>
         <el-table-column label="操作" align="center">
@@ -63,7 +63,7 @@
 
 <script>
 import { reactive, ref } from "vue";
-import { getVideoCameraList } from "../api/device-manager-api";
+import { getAlarmRecordList } from "../api/alarm-manager-api";
 export default {
   name: "URLManager",
   setup() {
@@ -76,7 +76,7 @@ export default {
     const pageTotal = ref(0);
 
     const getData = () => {
-      getVideoCameraList(query).then((res) => {
+      getAlarmRecordList(query).then((res) => {
         tableData.value = res.list;
         pageTotal.value = res.pageTotal;
       })
