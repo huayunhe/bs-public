@@ -17,3 +17,20 @@ export const userLogin = (userName,userPassword) => {
         }
     });
 };
+export const videoUrlManager = () => {
+    return request({
+        url: '/video/selectAll',
+        method: 'get',
+        params: {
+        }
+    });
+};
+export const cameraToVideoManager = () => {
+    return request({
+        url: '/camera/selectCameraToVideoAll',
+        method: 'get',
+        params: {
+        }
+    });
+};
+

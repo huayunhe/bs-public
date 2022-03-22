@@ -25,17 +25,17 @@
         header-cell-class-name="table-header"
       >
         <el-table-column
-          prop="name"
+          prop="videoName"
           label="视频流名称"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="cameraId"
+          prop="cameraNumber"
           label="摄像头编号"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="cameraAddr"
+          prop="cameraAdder"
           label="摄像头地址"
           align="center"
         ></el-table-column>
@@ -63,7 +63,8 @@
 
 <script>
 import { reactive, ref } from "vue";
-import { getVideoCameraList } from "../api/device-manager-api";
+import {cameraToVideoManager} from "../api/index";
+
 export default {
   name: "URLManager",
   setup() {
@@ -75,13 +76,12 @@ export default {
     const tableData = ref([]);
     const pageTotal = ref(0);
 
-    const getData = () => {
-      getVideoCameraList(query).then((res) => {
-        tableData.value = res.list;
-        pageTotal.value = res.pageTotal;
-      })
-    }
-    getData();
+    const getDate = () =>{
+      cameraToVideoManager().then((res)=>{
+                tableData.value=res.data;
+            });
+    };
+    getDate();
 
     const handleEdit = (index, row) => {
       return;
