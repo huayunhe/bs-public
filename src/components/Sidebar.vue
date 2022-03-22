@@ -82,6 +82,25 @@ export default {
         ],
       },
       {
+        icon: "el-icon-lx-cascades",
+        index: "AlarmManager",
+        title: "告警管理",
+        subs: [
+          {
+            index: "/WaterLevelManager",
+            title: "水位告警管理",
+          },
+          {
+            index: "/FloaterManager",
+            title: "水面漂浮物告警管理",
+          },
+          {
+            index: "/AlarmRecordManager",
+            title: "告警记录上报管理",
+          },
+        ],
+      },
+      {
         icon: "el-icon-lx-copy",
         index: "/tabs",
         title: "tab选项卡",

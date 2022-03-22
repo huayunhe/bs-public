@@ -39,6 +39,27 @@ const routes = [
                 },
                 component: () => import( /* webpackChunkName: "table" */ "../views/AssociatedCameraManager.vue")
             }, {
+                path: "/WaterLevelManager",
+                name: "WaterLevelManager",
+                meta: {
+                    title: '水位告警管理'
+                },
+                component: () => import( /* webpackChunkName: "table" */ "../views/WaterLevelManager.vue")
+            }, {
+                path: "/FloaterManager",
+                name: "FloaterManager",
+                meta: {
+                    title: '水面漂浮物告警管理'
+                },
+                component: () => import( /* webpackChunkName: "table" */ "../views/FloaterManager.vue")
+            }, {
+                path: "/AlarmRecordManager",
+                name: "AlarmRecordManager",
+                meta: {
+                    title: '告警记录上报管理'
+                },
+                component: () => import( /* webpackChunkName: "table" */ "../views/AlarmRecordManager.vue")
+            }, {
                 path: "/charts",
                 name: "basecharts",
                 meta: {

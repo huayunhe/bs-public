@@ -1,0 +1,15 @@
+{
+  "list": [
+    {
+      "name": "video1",
+      "waterLevel": 20,
+      "cameraAddr": "长沙市湘江橘子洲河段"
+    },
+    {
+      "name": "video2",
+      "waterLevel": 15,
+      "cameraAddr": "长沙市湘江巴溪洲河段"
+    }
+  ],
+  "pageTotal": 1
+}

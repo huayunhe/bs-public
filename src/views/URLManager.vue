@@ -45,6 +45,7 @@
             <el-button
               type="text"
               icon="el-icon-delete"
+              class="red"
               @click="handleDelete(scope.$index, scope.row)"
               >删除</el-button
             >
@@ -57,6 +58,7 @@
 
 <script>
 import { reactive, ref } from "vue";
+import { getVideoURLList } from "../api/device-manager-api";
 export default {
   name: "URLManager",
   setup() {
@@ -66,6 +68,15 @@ export default {
     });
     const tableData = ref([]);
     const pageTotal = ref(0);
+
+    const getData = () => {
+      getVideoURLList(query).then((res) => {
+        console.log(res)
+        tableData.value = res.list;
+        pageTotal.value = res.pageTotal;
+      })
+    }
+    getData();
 
     const handleEdit = (index, row) => {
       return;

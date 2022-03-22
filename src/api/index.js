@@ -1,4 +1,4 @@
-import request from '../utils/request';
+import request from '../utils/local_request';
 
 export const fetchData = query => {
     return request({
