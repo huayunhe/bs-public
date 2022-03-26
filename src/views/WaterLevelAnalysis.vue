@@ -35,13 +35,18 @@
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="waterLevelHigh"
-          label="水尺水位过高设定(cm)"
+          prop="waterLevel"
+          label="水尺水位(cm)"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="waterLevelLow"
-          label="水尺水位过低设定(cm)"
+          prop="isLevelToHigh"
+          label="是否过高"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="isLevelToLow"
+          label="是否过低"
           align="center"
         ></el-table-column>
         <el-table-column label="操作" align="center">
@@ -68,7 +73,7 @@
 
 <script>
 import { reactive, ref } from "vue";
-import { getWaterLevelList } from "../api/alarm-manager-api";
+import { getWaterLevelAnalysisList } from "../api/water-infromation-analysis-api";
 export default {
   name: "URLManager",
   setup() {
@@ -76,15 +81,19 @@ export default {
       name: "",
       waterLevelHigh: "",
       waterLevelLow: "",
+      isLevelToHigh:"",
+      isLevelToLow:"",
       cameraAddr: "",
     });
     const tableData = ref([]);
     const pageTotal = ref(0);
 
     const getData = () => {
-      getWaterLevelList(query).then((res) => {
+        console.log(13245);
+      getWaterLevelAnalysisList(query).then((res) => {
         tableData.value = res.list;
         pageTotal.value = res.pageTotal;
+        console.log(res);
       })
     }
     getData();
