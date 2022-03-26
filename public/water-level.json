@@ -2,13 +2,17 @@
   "list": [
     {
       "name": "video1",
-      "waterLevel": 20,
-      "cameraAddr": "长沙市湘江橘子洲河段"
+      "waterLevelHigh": 200,
+      "waterLevelLow": 150,
+      "waterLevel": 250,
+      "cameraAddr": "长沙市湘江橘子洲河段1号区"
     },
     {
       "name": "video2",
-      "waterLevel": 15,
-      "cameraAddr": "长沙市湘江巴溪洲河段"
+      "waterLevelHigh": 300,
+      "waterLevelLow": 150,
+      "waterLevel": 200,
+      "cameraAddr": "长沙市湘江巴溪洲河段3号区"
     }
   ],
   "pageTotal": 1

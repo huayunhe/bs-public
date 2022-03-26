@@ -3,9 +3,9 @@
     <div class="crumbs">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item>
-          <i class="el-icon-lx-calendar"></i>设备
+          <i class="el-icon-lx-calendar"></i>告警
         </el-breadcrumb-item>
-        <el-breadcrumb-item>关联管理</el-breadcrumb-item>
+        <el-breadcrumb-item>水位告警管理</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="container">
@@ -25,18 +25,28 @@
         header-cell-class-name="table-header"
       >
         <el-table-column
-          prop="videoName"
+          prop="name"
           label="视频流名称"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="cameraNumber"
-          label="摄像头编号"
+          prop="cameraAddr"
+          label="摄像头地址"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="cameraAdder"
-          label="摄像头地址"
+          prop="waterLevel"
+          label="水尺水位(cm)"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="isLevelToHigh"
+          label="是否过高"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="isLevelToLow"
+          label="是否过低"
           align="center"
         ></el-table-column>
         <el-table-column label="操作" align="center">
@@ -63,25 +73,30 @@
 
 <script>
 import { reactive, ref } from "vue";
-import {cameraToVideoManager} from "../api/index";
-
+import { getWaterLevelAnalysisList } from "../api/water-infromation-analysis-api";
 export default {
   name: "URLManager",
   setup() {
     const query = reactive({
       name: "",
-      cameraId: "",
+      waterLevelHigh: "",
+      waterLevelLow: "",
+      isLevelToHigh:"",
+      isLevelToLow:"",
       cameraAddr: "",
     });
     const tableData = ref([]);
     const pageTotal = ref(0);
 
-    const getDate = () =>{
-      cameraToVideoManager().then((res)=>{
-                tableData.value=res.data;
-            });
-    };
-    getDate();
+    const getData = () => {
+        console.log(13245);
+      getWaterLevelAnalysisList(query).then((res) => {
+        tableData.value = res.list;
+        pageTotal.value = res.pageTotal;
+        console.log(res);
+      })
+    }
+    getData();
 
     const handleEdit = (index, row) => {
       return;

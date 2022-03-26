@@ -39,6 +39,20 @@ const routes = [
                 },
                 component: () => import( /* webpackChunkName: "table" */ "../views/AssociatedCameraManager.vue")
             }, {
+                path: "/WaterLevelAnalysis",
+                name: "WaterLevelAnalysis",
+                meta: {
+                    title: '水位检测分析'
+                },
+                component: () => import( /* webpackChunkName: "table" */ "../views/WaterLevelAnalysis.vue")
+            },{
+                path: "/FloaterAnalysis",
+                name: "FloaterAnalysis",
+                meta: {
+                    title: '水面漂浮物检测分析'
+                },
+                component: () => import( /* webpackChunkName: "table" */ "../views/FloaterAnalysis.vue")
+            },{
                 path: "/WaterLevelManager",
                 name: "WaterLevelManager",
                 meta: {

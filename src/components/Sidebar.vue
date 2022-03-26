@@ -32,7 +32,7 @@
                   {{ threeItem.title }}</el-menu-item
                 >
               </el-submenu>
-              <el-menu-item v-else :index="subItem.index" :key="subItem.index"
+              <el-menu-item v-else :index="subItem.index" :uniquekey="subItem.index"
                 >{{ subItem.title }}
               </el-menu-item>
             </template>
@@ -83,6 +83,21 @@ export default {
       },
       {
         icon: "el-icon-lx-cascades",
+        index: "WaterInformationAnalysis",
+        title: "水务信息分析",
+        subs: [
+          {
+            index: "/WaterLevelAnalysis",
+            title: "水位检测分析",
+          },
+          {
+            index: "/FloaterAnalysis",
+            title: "水面漂浮物检测分析",
+          },
+        ],
+      },
+      {
+        icon: "el-icon-lx-cascades",
         index: "AlarmManager",
         title: "告警管理",
         subs: [
@@ -100,6 +115,7 @@ export default {
           },
         ],
       },
+
       {
         icon: "el-icon-lx-copy",
         index: "/tabs",

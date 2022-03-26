@@ -3,12 +3,12 @@
     {
       "name": "video1",
       "cameraId": "ca_1",
-      "cameraAddr": "长沙市湘江橘子洲河段"
+      "cameraAddr": "长沙市湘江橘子洲河段1号区"
     },
     {
       "name": "video2",
       "cameraId": "ca_2",
-      "cameraAddr": "长沙市湘江巴溪洲河段"
+      "cameraAddr": "长沙市湘江巴溪洲河段3号区"
     }
   ],
   "pageTotal": 1

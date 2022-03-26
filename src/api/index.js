@@ -1,7 +1,8 @@
-import request from '../utils/local_request';
+import request from '../utils/request';
+import local_request from '../utils/local_request';
 
 export const fetchData = query => {
-    return request({
+    return local_request({
         url: './table.json',
         method: 'get',
         params: query
@@ -17,3 +18,20 @@ export const userLogin = (userName,userPassword) => {
         }
     });
 };
+export const videoUrlManager = () => {
+    return request({
+        url: '/video/selectAll',
+        method: 'get',
+        params: {
+        }
+    });
+};
+export const cameraToVideoManager = () => {
+    return request({
+        url: '/camera/selectCameraToVideoAll',
+        method: 'get',
+        params: {
+        }
+    });
+};
+

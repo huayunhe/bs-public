@@ -25,12 +25,12 @@
         header-cell-class-name="table-header"
       >
         <el-table-column
-          prop="name"
+          prop="videoName"
           label="视频流名称"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="url"
+          prop="videoUrl"
           label="URL"
           align="center"
         ></el-table-column>
@@ -58,7 +58,7 @@
 
 <script>
 import { reactive, ref } from "vue";
-import { getVideoURLList } from "../api/device-manager-api";
+import {videoUrlManager} from "../api/index";
 export default {
   name: "URLManager",
   setup() {
@@ -69,14 +69,12 @@ export default {
     const tableData = ref([]);
     const pageTotal = ref(0);
 
-    const getData = () => {
-      getVideoURLList(query).then((res) => {
-        console.log(res)
-        tableData.value = res.list;
-        pageTotal.value = res.pageTotal;
-      })
-    }
-    getData();
+    const getDate = () =>{
+      videoUrlManager().then((res)=>{
+                tableData.value=res.data;
+            });
+    };
+    getDate();
 
     const handleEdit = (index, row) => {
       return;
