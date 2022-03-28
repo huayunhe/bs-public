@@ -72,6 +72,14 @@ export default {
         title: "设备管理",
         subs: [
           {
+            index: "/PictureManager",
+            title: "图片管理",
+          },
+          {
+            index: "/VideoManager",
+            title: "视频流管理",
+          },
+          {
             index: "/URLManager",
             title: "视频流URL管理",
           },

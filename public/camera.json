@@ -3,12 +3,14 @@
     {
       "name": "video1",
       "cameraId": "ca_1",
-      "cameraAddr": "长沙市湘江橘子洲河段1号区"
+      "cameraAddr": "长沙市湘江橘子洲河段1号区",
+      "thumb": "https://lin-xin.gitee.io/images/post/wms.png"
     },
     {
       "name": "video2",
       "cameraId": "ca_2",
-      "cameraAddr": "长沙市湘江巴溪洲河段3号区"
+      "cameraAddr": "长沙市湘江巴溪洲河段3号区",
+      "thumb": "https://lin-xin.gitee.io/images/post/node3.png"
     }
   ],
   "pageTotal": 1
