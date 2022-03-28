@@ -25,6 +25,20 @@ const routes = [
                 },
                 component: () => import( /* webpackChunkName: "table" */ "../views/BaseTable.vue")
             }, {
+                path: "/PictureManager",
+                name: "PictureManager",
+                meta: {
+                    title: '图片管理'
+                },
+                component: () => import( /* webpackChunkName: "table" */ "../views/PictureManager.vue")
+            }, {
+                path: "/VideoManager",
+                name: "VideoManager",
+                meta: {
+                    title: '视频流管理'
+                },
+                component: () => import( /* webpackChunkName: "table" */ "../views/VideoManager.vue")
+            }, {
                 path: "/URLManager",
                 name: "URLManager",
                 meta: {
