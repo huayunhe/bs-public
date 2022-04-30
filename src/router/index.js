@@ -24,34 +24,42 @@ const routes = [
                     title: '表格'
                 },
                 component: () => import( /* webpackChunkName: "table" */ "../views/BaseTable.vue")
-            }, {
-                path: "/PictureManager",
-                name: "PictureManager",
+            }, 
+            {
+                path: "/PictureWaterLevelManager",
+                name: "PictureWaterLevelManager",
                 meta: {
-                    title: '图片管理'
+                    title: '水位图片管理'
                 },
-                component: () => import( /* webpackChunkName: "table" */ "../views/PictureManager.vue")
+                component: () => import( /* webpackChunkName: "table" */ "../views/device-manager/PictureWaterLevelManager.vue")
             }, {
-                path: "/VideoManager",
-                name: "VideoManager",
+                path: "/VideoWaterLevelManager",
+                name: "VideoWaterLevelManager",
                 meta: {
-                    title: '视频流管理'
+                    title: '水位视频管理'
                 },
-                component: () => import( /* webpackChunkName: "table" */ "../views/VideoManager.vue")
+                component: () => import( /* webpackChunkName: "table" */ "../views/device-manager/VideoWaterLevelManager.vue")
             }, {
-                path: "/URLManager",
-                name: "URLManager",
+                path: "/VideoFloaterManager",
+                name: "VideoFloaterManager",
                 meta: {
-                    title: '视频流URL管理'
+                    title: '漂浮物视频管理'
                 },
-                component: () => import( /* webpackChunkName: "table" */ "../views/URLManager.vue")
+                component: () => import( /* webpackChunkName: "table" */ "../views/device-manager/VideoFloaterManager.vue")
             }, {
-                path: "/AssociatedCameraManager",
-                name: "AssociatedCameraManager",
+                path: "/RulerManager",
+                name: "RulerManager",
                 meta: {
-                    title: '视频流关联摄像头管理'
+                    title: '水尺信息管理'
                 },
-                component: () => import( /* webpackChunkName: "table" */ "../views/AssociatedCameraManager.vue")
+                component: () => import( /* webpackChunkName: "table" */ "../views/device-manager/RulerManager.vue")
+            }, {
+                path: "/CameraManager",
+                name: "CameraManager",
+                meta: {
+                    title: '摄像头信息管理'
+                },
+                component: () => import( /* webpackChunkName: "table" */ "../views/device-manager/CameraManager.vue")
             }, {
                 path: "/WaterLevelAnalysis",
                 name: "WaterLevelAnalysis",
@@ -88,6 +96,24 @@ const routes = [
                 },
                 component: () => import( /* webpackChunkName: "table" */ "../views/AlarmRecordManager.vue")
             }, {
+                path: "/UserManager",
+                name: "UserManager",
+                meta: {
+                    title: '用户管理',
+                    permission: true,
+                    roles: ['1','4'],
+                },
+                component: () => import ( /* webpackChunkName: "usermanage" */ "../views/system-manager/UserManager.vue")
+            }, {
+                path: "/RoleManager",
+                name: "RoleManager",
+                meta: {
+                    title: '权限管理',
+                    permission: true,
+                    roles: ['1','4'],
+                },
+                component: () => import ( /* webpackChunkName: "rolemanage" */ "../views/system-manager/RoleManager.vue")
+            }, {
                 path: "/charts",
                 name: "basecharts",
                 meta: {
@@ -109,13 +135,6 @@ const routes = [
                 },
                 component: () => import( /* webpackChunkName: "tabs" */ "../views/Tabs.vue")
             }, {
-                path: "/donate",
-                name: "donate",
-                meta: {
-                    title: '鼓励作者'
-                },
-                component: () => import( /* webpackChunkName: "donate" */ "../views/Donate.vue")
-            }, {
                 path: "/permission",
                 name: "permission",
                 meta: {
@@ -123,13 +142,6 @@ const routes = [
                     permission: true
                 },
                 component: () => import( /* webpackChunkName: "permission" */ "../views/Permission.vue")
-            }, {
-                path: "/i18n",
-                name: "i18n",
-                meta: {
-                    title: '国际化语言'
-                },
-                component: () => import( /* webpackChunkName: "i18n" */ "../views/I18n.vue")
             }, {
                 path: "/upload",
                 name: "upload",
@@ -191,14 +203,13 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     document.title = `${to.meta.title} | vue-manage-system`;
-    const role = localStorage.getItem('ms_username');
-    if (!role && to.path !== '/login') {
+    const roleId = localStorage.getItem('roleId');
+    console.log('beforeEach_roleId:',roleId)
+    if (!roleId && to.path !== '/login') {
         next('/login');
     } else if (to.meta.permission) {
-        // 如果是管理员权限则可进入，这里只是简单的模拟管理员权限而已
-        role === 'admin'
-            ? next()
-            : next('/403');
+        if(to.meta.roles.includes(roleId)) next();
+        else next('/403');
     } else {
         next();
     }
