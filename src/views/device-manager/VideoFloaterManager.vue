@@ -78,7 +78,14 @@
 
     <!-- 编辑弹出框 -->
     <el-dialog title="查看视频" v-model="editVisible" width="50%">
-      <video controls autoplay height="421" width="700" src="../../../Sequence_2.mp4">
+      <video
+        controls
+        autoplay
+        height="421"
+        width="700"
+        src="src\assets\video\HwVideoEditor_2022_01_06_234738779.mp4"
+        type="video/mp4"
+      >
         <!-- <source  type="video/mp4"> -->
       </video>
       <template #footer>
@@ -100,7 +107,7 @@
       </el-form>
       <el-upload
         class="avatar-uploader"
-        :drag="{plus}"
+        :drag="{ plus }"
         action="http://localhost:8084/videoFloater/uploadVideoFloater"
         multiple
         name="file"
@@ -108,11 +115,21 @@
         :show-file-list="false"
         :on-success="handleVideoSuccess"
         :before-upload="beforeUploadVideo"
-        :on-progress="uploadVideoProcess">
+        :on-progress="uploadVideoProcess"
+      >
         <i v-if="plus" class="el-icon-upload"></i>
-        <div v-if="plus" class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-        <el-progress v-if="videoFlag == true" type="circle" :percentage="videoUploadPercent" style="margin-top:10px;"></el-progress>
-        <div class="el-upload__tip" slot="tip">只能上传mp4/wmv/avi文件，且不超过300M</div>
+        <div v-if="plus" class="el-upload__text">
+          将文件拖到此处，或<em>点击上传</em>
+        </div>
+        <el-progress
+          v-if="videoFlag == true"
+          type="circle"
+          :percentage="videoUploadPercent"
+          style="margin-top: 10px"
+        ></el-progress>
+        <div class="el-upload__tip" slot="tip">
+          只能上传mp4/wmv/avi文件，且不超过300M
+        </div>
       </el-upload>
       <template #footer>
         <span class="dialog-footer">
@@ -121,21 +138,23 @@
         </span>
       </template>
     </el-dialog>
-
   </div>
 </template>
 
 <script>
 import { reactive, ref } from "vue";
 import { ElMessage } from "element-plus";
-import { getVideoFloaterList, addVideoFloater } from "../../api/device-manager-api";
+import {
+  getVideoFloaterList,
+  addVideoFloater,
+} from "../../api/device-manager-api";
 
 export default {
   name: "VideoFloaterManager",
   setup() {
     const query = reactive({
       name: "",
-      videoFloaterId:"",
+      videoFloaterId: "",
       cameraId: "",
       cameraAddr: "",
       videoUrl: "",
@@ -144,9 +163,9 @@ export default {
     const pageTotal = ref(0);
     const editVisible = ref(false);
     const uploadVisible = ref(false);
-    const videoFlag=ref(false);
-    const plus= ref(true);
-    const videoUploadPercent=ref(0);
+    const videoFlag = ref(false);
+    const plus = ref(true);
+    const videoUploadPercent = ref(0);
 
     const getData = () => {
       getVideoFloaterList(query).then((res) => {
@@ -163,7 +182,6 @@ export default {
     const handleUpload = () => {
       uploadVisible.value = true;
       return;
-      
     };
 
     const handleDelete = (index, row) => {
@@ -178,47 +196,48 @@ export default {
     const saveUpload = () => {
       console.log(query);
       addVideoFloater(query).then((res) => {
-          console.log(res)
-          if(res.code===200) {
-              ElMessage.success('上传成功');
-              uploadVisible.value = false;
-              return;
-          }
-          else {
-              ElMessage.error(res.msg);
-          }
+        console.log(res);
+        if (res.code === 200) {
+          ElMessage.success("上传成功");
+          uploadVisible.value = false;
+          return;
+        } else {
+          ElMessage.error(res.msg);
+        }
       });
     };
     const beforeUploadVideo = (file) => {
-      const isLt300M = file.size / 1024 / 1024 < 300
-      if (['video/mp4', 'video/avi', 'video/x-ms-wmv'].indexOf(file.type) == -1) {
-        ElMessage.error('请上传正确的视频格式')
-        return false
+      const isLt300M = file.size / 1024 / 1024 < 300;
+      if (
+        ["video/mp4", "video/avi", "video/x-ms-wmv"].indexOf(file.type) == -1
+      ) {
+        ElMessage.error("请上传正确的视频格式");
+        return false;
       }
       if (!isLt300M) {
-        ElMessage.error('上传视频大小不能超过300MB哦!')
-        return false
+        ElMessage.error("上传视频大小不能超过300MB哦!");
+        return false;
       }
     };
     // 视频上传过程中执行
     const uploadVideoProcess = (event, file, fileList) => {
-      plus.value = false
-      videoFlag.value = true
-      videoUploadPercent.value = file.percentage.toFixed(0)
+      plus.value = false;
+      videoFlag.value = true;
+      videoUploadPercent.value = file.percentage.toFixed(0);
     };
     // 视频上传成功是执行
     const handleVideoSuccess = (res, file) => {
-      plus.value = false
-      videoUploadPercent.value = 100
-      console.log(res)
+      plus.value = false;
+      videoUploadPercent.value = 100;
+      console.log(res);
       // 如果为200代表视频保存成功
       if (res.code === 200) {
         // 接收视频传回来保存地址
         // 至于怎么使用看你啦~
-        query.videoUrl = res.data
-        ElMessage.success('视频上传成功！')
+        query.videoUrl = res.data;
+        ElMessage.success("视频上传成功！");
       } else {
-        ElMessage.error('视频上传失败，请重新上传！')
+        ElMessage.error("视频上传失败，请重新上传！");
       }
     };
 
