@@ -72,20 +72,24 @@ export default {
         title: "设备管理",
         subs: [
           {
-            index: "/PictureManager",
-            title: "图片管理",
+            index: "/PictureWaterLevelManager",
+            title: "水位图片管理",
           },
           {
-            index: "/VideoManager",
-            title: "视频流管理",
+            index: "/VideoWaterLevelManager",
+            title: "水位视频管理",
           },
           {
-            index: "/URLManager",
-            title: "视频流URL管理",
+            index: "/VideoFloaterManager",
+            title: "漂浮物视频管理",
           },
           {
-            index: "/AssociatedCameraManager",
-            title: "视频流关联摄像头管理",
+            index: "/RulerManager",
+            title: "水尺信息管理",
+          },
+          {
+            index: "/CameraManager",
+            title: "摄像头信息管理",
           },
         ],
       },
@@ -165,11 +169,6 @@ export default {
         title: "schart图表",
       },
       {
-        icon: "el-icon-lx-global",
-        index: "/i18n",
-        title: "国际化功能",
-      },
-      {
         icon: "el-icon-lx-warn",
         index: "7",
         title: "错误处理",
@@ -185,9 +184,20 @@ export default {
         ],
       },
       {
-        icon: "el-icon-lx-redpacket_fill",
-        index: "/donate",
-        title: "支持作者",
+        icon: "el-icon-lx-apps",
+        index: "system-manager",
+        title: "系统管理",
+        roles: ['1','4'],
+        subs: [
+          {
+            index: "/UserManager",
+            title: "用户管理",
+          },
+          {
+            index: "/RoleManager",
+            title: "权限管理",
+          },
+        ],
       },
     ];
 

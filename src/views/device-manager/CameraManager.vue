@@ -5,14 +5,14 @@
         <el-breadcrumb-item>
           <i class="el-icon-lx-calendar"></i>设备
         </el-breadcrumb-item>
-        <el-breadcrumb-item>关联管理</el-breadcrumb-item>
+        <el-breadcrumb-item>摄像头管理</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="container">
       <div class="handle-box">
         <el-input
           v-model="query.name"
-          placeholder="视频流名称"
+          placeholder="摄像头编号"
           class="handle-input mr10"
         ></el-input>
         <el-button type="primary" icon="el-icon-search">搜索</el-button>
@@ -25,18 +25,18 @@
         header-cell-class-name="table-header"
       >
         <el-table-column
-          prop="videoName"
-          label="视频流名称"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="cameraNumber"
+          prop="cameraId"
           label="摄像头编号"
           align="center"
         ></el-table-column>
         <el-table-column
           prop="cameraAdder"
           label="摄像头地址"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="cameraType"
+          label="摄像头识别类型"
           align="center"
         ></el-table-column>
         <el-table-column label="操作" align="center">
@@ -63,21 +63,22 @@
 
 <script>
 import { reactive, ref } from "vue";
-import {cameraToVideoManager} from "../api/index";
+import {cameraManager} from "../../api/device-manager-api";
 
 export default {
-  name: "URLManager",
+  name: "CameraManager",
   setup() {
     const query = reactive({
       name: "",
       cameraId: "",
       cameraAddr: "",
+      cameraType: "",
     });
     const tableData = ref([]);
     const pageTotal = ref(0);
 
     const getDate = () =>{
-      cameraToVideoManager().then((res)=>{
+      cameraManager().then((res)=>{
                 tableData.value=res.data;
             });
     };
