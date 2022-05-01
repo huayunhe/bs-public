@@ -31,21 +31,21 @@ import { ref, reactive } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
-import { userLogin } from  "../api/index";
+import { userLogin } from  "../api/user";
 
 export default {
     setup() {
         const router = useRouter();
         const param = reactive({
-            username: "admin",
-            password: "123123",
+            username: "18397346072",
+            password: "123456",
         });
 
         const rules = {
             username: [
                 {
                     required: true,
-                    message: "请输入用户名",
+                    message: "请输入账号",
                     trigger: "blur",
                 },
             ],
@@ -53,28 +53,52 @@ export default {
                 { required: true, message: "请输入密码", trigger: "blur" },
             ],
         };
-        const login = ref(null);
+        // const login = ref(null);
+        // const submitForm = () => {
+        //     // login.value.validate((valid) => {
+        //     //     if (valid) {
+        //     //         ElMessage.success("登录成功");
+        //     //         localStorage.setItem("ms_username", param.username);
+        //     //         router.push("/");
+        //     //     } else {
+        //     //         ElMessage.error("登录成功");
+        //     //         return false;
+        //     //     }
+        //     // });
+        //     userLogin(param.userphone, param.password).then((res)=>{
+        //         if(res.code===200){
+        //             ElMessage.success("登录成功");
+        //             localStorage.setItem("ms_userphone", param.userphone);
+        //             router.push("/");
+        //         } else {
+        //             ElMessage.error(res.msg);
+        //             return false;
+        //         }
+        //     })
+        // };
+
+        const peopleId = ref(null);
+        const roleId = ref(null);
+        localStorage.clear();
+        localStorage.setItem("roleId", roleId.value);
+        console.log('roleId:',roleId.value);
         const submitForm = () => {
-            // login.value.validate((valid) => {
-            //     if (valid) {
-            //         ElMessage.success("登录成功");
-            //         localStorage.setItem("ms_username", param.username);
-            //         router.push("/");
-            //     } else {
-            //         ElMessage.error("登录成功");
-            //         return false;
-            //     }
-            // });
-            userLogin(param.username, param.password).then((res)=>{
+            userLogin(param.username,param.password).then((res) => {
+                console.log(res)
                 if(res.code===200){
-                    ElMessage.success("登录成功");
-                    localStorage.setItem("ms_username", param.username);
+                    peopleId.value = res.data.userId; //**********************************************************************************************
+                    roleId.value = res.data.userRoleId;//******************************* */
+                    //存储用户ID和用户权限
+                    localStorage.setItem("peopleId", peopleId.value);
+                    localStorage.setItem("roleId", roleId.value);
+                    console.log("登录成功")
                     router.push("/");
-                } else {
-                    ElMessage.error(res.msg);
-                    return false;
                 }
-            })
+                else if(res.code === 400)
+                {
+                    alert(res.msg)
+                }
+            });
         };
 
         const store = useStore();
@@ -83,7 +107,9 @@ export default {
         return {
             param,
             rules,
-            login,
+            // login,
+            peopleId,
+            roleId,
             submitForm,
         };
     },
